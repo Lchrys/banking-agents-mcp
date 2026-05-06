@@ -1,20 +1,22 @@
-# banking-agents-mcp
+# Banking Agents Ecosystem: Orquestração Multiagente com MCP & A2A
 
-Sistema de exemplo de **atendimento bancario multiagente** usando:
-- **A2A** para comunicacao com agentes especialistas
-- **MCP (Model Context Protocol)** para exposicao de ferramentas/recursos
-- **Supervisor** para roteamento de intencao do usuario
+### Projeto desenvolvido como estudo na ALURA
+---
+Sistema de exemplo de **atendimento bancário multiagente** usando:
+- **A2A** para comunicação com agentes especialistas
+- **MCP (Model Context Protocol)** para exposição de ferramentas/recursos
+- **Supervisor** para roteamento de intenção do usuário
 - **Frontends** para chat (Streamlit e React AG-UI)
 
-## Visao geral da arquitetura
+## Visão geral da arquitetura
 
-O projeto simula um banco digital (MDBank) com fluxo de atendimento por agentes:
+O projeto simula um banco digital com fluxo de atendimento por agentes:
 
-- `supervisor`: recebe a pergunta do usuario e decide quais agentes chamar
+- `supervisor`: recebe a pergunta do usuário e decide quais agentes chamar
 - `agents/abrir_conta`: especialista em abertura de conta
-- `agents/cartao_credito`: especialista em cartao de credito
-- `recursos`: servidor MCP com ferramentas e recursos (conta/cartao)
-- `bfa`: camada de discovery e busca semantica (BM25) para skills (agentes + tools)
+- `agents/cartao_credito`: especialista em cartão de crédito
+- `recursos`: servidor MCP com ferramentas e recursos (conta/cartão)
+- `bfa`: camada de discovery e busca semântica (BM25) para skills (agentes + tools)
 - `frontend`: interface Streamlit para conversa com o supervisor
 - `frontend2`: interface React com protocolo AG-UI
 
@@ -22,10 +24,10 @@ O projeto simula um banco digital (MDBank) com fluxo de atendimento por agentes:
 
 ```text
 .
-├─ supervisor/              # API FastAPI + orquestracao LangGraph
+├─ supervisor/              # API FastAPI + orquestração LangGraph
 ├─ agents/
 │  ├─ abrir_conta/          # Agente A2A de abertura de conta
-│  └─ cartao_credito/       # Agente A2A de cartao de credito
+│  └─ cartao_credito/       # Agente A2A de cartão de crédito
 ├─ recursos/                # Servidor MCP (tools/resources)
 ├─ bfa/                     # Discovery de agentes/tools e resolver BM25
 ├─ frontend/                # Frontend Streamlit
@@ -39,7 +41,7 @@ O projeto simula um banco digital (MDBank) com fluxo de atendimento por agentes:
 - Docker Compose (v2+)
 - Chave da OpenAI (`OPENAI_API_KEY`)
 
-## Configuracao de ambiente
+## Configuração de ambiente
 
 Os componentes com LLM usam `load_dotenv()`. Crie um arquivo `.env` com sua chave:
 
@@ -47,7 +49,7 @@ Os componentes com LLM usam `load_dotenv()`. Crie um arquivo `.env` com sua chav
 - `agents/abrir_conta/.env`
 - `agents/cartao_credito/.env`
 
-Conteudo:
+Conteúdo:
 
 ```env
 OPENAI_API_KEY=sua_chave_aqui
@@ -55,13 +57,13 @@ OPENAI_API_KEY=sua_chave_aqui
 
 ## Subir o projeto
 
-Na raiz do repositorio:
+Na raiz do repositório:
 
 ```bash
 docker compose up --build
 ```
 
-Servicos e portas:
+Serviços e portas:
 
 - Supervisor API: `http://localhost:8080`
 - Frontend Streamlit: `http://localhost:9090`
@@ -92,22 +94,22 @@ Servicos e portas:
 
 ## Fluxo funcional (resumo)
 
-1. Usuario envia pergunta no frontend.
-2. Supervisor classifica intencao e escolhe agente(s).
+1. Usuário envia pergunta no frontend.
+2. Supervisor classifica intenção e escolhe agente(s).
 3. Supervisor chama agentes via A2A.
-4. Agentes usam tools/resources MCP no servico `recursos` quando necessario.
-5. Respostas sao agregadas e retornam ao usuario.
+4. Agentes usam tools/resources MCP no serviço `recursos` quando necessário.
+5. Respostas são agregadas e retornam ao usuário.
 
-## Desenvolvimento rapido
+## Desenvolvimento rápido
 
-- Reinicio ao salvar esta habilitado nos containers (`--reload` / polling).
+- Reinício ao salvar está habilitado nos containers (`--reload` / polling).
 - Para derrubar tudo:
 
 ```bash
 docker compose down
 ```
 
-## Observacoes
+## Observações
 
-- Este projeto e voltado para estudo/prototipacao de arquitetura multiagente.
-- Nao usar em producao sem hardening de seguranca, autenticacao e persistencia robusta.
+- Este projeto é voltado para estudo/prototipação de arquitetura multiagente.
+- Não usar em produção sem hardening de segurança, autenticação e persistência robusta.
