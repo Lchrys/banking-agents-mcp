@@ -1,1 +1,19 @@
-demo-1
+# Dependências e Ambientes Virtuais
+node_modules/
+venv/
+.venv/
+
+# Cache do Python (Onde estavam aqueles arquivos que limpamos)
+**/__pycache__/
+*.py[cod]
+
+# Arquivos de Configuração e Segredo (Muito importante para Banking!)
+.env
+*.log
+
+# Pastas de dados do Docker
+data/
+db_data/
+
+# IDEs
+.vscode/
